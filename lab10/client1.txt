@@ -1,0 +1,10 @@
+Script started on 2019-11-21 23:34:17-0500
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[00m$ ./bufserver [8Pmake./readserverbufserver [4Pcd lab10/mnt/c/YouyiUofT/CSC209/labs/dengyouy[18P./randclient 127.0.0.1
+connect: Connection refused
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[00m$ ./randclient 127.0.0.1
+connect: Connection refused
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[00m$ ./randclient 127.0.0.1
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab10[00m$ exit
+exit
+
+Script done on 2019-11-21 23:50:22-0500

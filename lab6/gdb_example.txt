@@ -1,0 +1,155 @@
+Script started on 2019-10-16 21:51:51-0400
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab6[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab6[00m$ gdb .\[K/over[K[K[K[K[K[K[K overflow
+GNU gdb (Ubuntu 8.1-0ubuntu3) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from overflow...done.
+(gdb) list[Kt 1
+1	#include <stdio.h>
+2	
+3	#define SIZE 4
+4	#define OVERFLOW 5
+5	
+6	int main() {
+7	    int index = 0;
+8	    int i;
+9	    int before[SIZE] = {10, 10, 10, 10};
+10	    int a[SIZE] = {0, 0, 0, 0};
+(gdb) list 15
+10	    int a[SIZE] = {0, 0, 0, 0};
+11	    int after[SIZE] = {10, 10, 10, 10};
+12	
+13	    printf("Address of the variables:\n");
+14	    for (index = 0; index < SIZE; index++) {
+15	        printf("%lx -> &after[%d]\n", (unsigned long) &after[index], index);
+16	    }
+17	    for (index = 0; index < SIZE; index++) {
+18	        printf("%lx -> &a[%d]\n", (unsigned long) &a[index], index);
+19	    }
+(gdb) list
+20	    for (index = 0; index < SIZE; index++) {
+21	        printf("%lx -> &before[%d]\n", (unsigned long) &before[index], index);
+22	    }
+23	    printf("%lx -> &i\n", (unsigned long)&i);
+24	    printf("%lx -> &index\n", (unsigned long)&index);
+25	    printf("\n");
+26	
+27	
+28	    printf("Initial values:\n");
+29	    printf("i = %d\n", i);
+(gdb) break 29
+Breakpoint 1 at 0x8d3: file overflow.c, line 29.
+(gdb) list 40
+35	
+36	    for (i = 0; i < OVERFLOW; i++) {
+37	        a[i] = i * 10;
+38	        printf("i = %d\n", i);
+39	        printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+40	        printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+41	        printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+42	    }
+43	
+44	    return 0;
+(gdb) break 36
+Breakpoint 2 at 0x959: file overflow.c, line 36.
+(gdb) run
+Starting program: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab6/overflow 
+Address of the variables:
+7ffffffee140 -> &after[0]
+7ffffffee144 -> &after[1]
+7ffffffee148 -> &after[2]
+7ffffffee14c -> &after[3]
+7ffffffee130 -> &a[0]
+7ffffffee134 -> &a[1]
+7ffffffee138 -> &a[2]
+7ffffffee13c -> &a[3]
+7ffffffee120 -> &before[0]
+7ffffffee124 -> &before[1]
+7ffffffee128 -> &before[2]
+7ffffffee12c -> &before[3]
+7ffffffee11c -> &i
+7ffffffee118 -> &index
+
+Initial values:
+
+Breakpoint 1, main () at overflow.c:29
+29	    printf("i = %d\n", i);
+(gdb) next
+i = 0
+30	    printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+(gdb) continue
+Continuing.
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+
+Breakpoint 2, main () at overflow.c:36
+36	    for (i = 0; i < OVERFLOW; i++) {
+(gdb) display [K[K[K[K[K[K[K[Kprint &(after[0])
+$1 = (int *) 0x7ffffffee140
+(gdb) display $(after[0])
+1: $(after[0]) = <error: 'at 0x0x7ffffffee140' has unknown return type; cast the call to its declared return type>
+(gdb) display $(after[0])[1P(after[0])&(after[0])[C[C[C[C[C[C[C[C[C[C
+2: &(after[0]) = (int *) 0x7ffffffee140
+(gdb) display after[0]
+3: after[0] = 10
+(gdb) next
+37	        a[i] = i * 10;
+1: $(after[0]) = <error: 'at 0x0x7ffffffee140' has unknown return type; cast the call to its declared return type>
+2: &(after[0]) = (int *) 0x7ffffffee140
+3: after[0] = 10
+(gdb) disply a[K&a[4](a[4][C[C[C[C)
+Undefined command: "disply".  Try "help".
+(gdb) disply &(a[4])[1@a[C[C[C[C[C[C[C[C[C
+4: &(a[4]) = (int *) 0x7ffffffee140
+(gdb) display a[4]
+5: a[4] = 10
+(gdb) next
+38	        printf("i = %d\n", i);
+1: $(after[0]) = <error: 'at 0x0x7ffffffee140' has unknown return type; cast the call to its declared return type>
+2: &(after[0]) = (int *) 0x7ffffffee140
+3: after[0] = 10
+4: &(a[4]) = (int *) 0x7ffffffee140
+5: a[4] = 10
+(gdb) continue
+Continuing.
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 10, 0, 0}
+after = {10, 10, 10, 10}
+i = 2
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+i = 3
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+i = 4
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {40, 10, 10, 10}
+[Inferior 1 (process 1158) exited normally]
+(gdb) next
+The program is not being run.
+(gdb) q
+]0;youyi@DESKTOP-IOK6VFV: /mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab6[01;32myouyi@DESKTOP-IOK6VFV[00m:[01;35m/mnt/c/YouyiUofT/CSC209/labs/dengyouy/lab6[00m$ exit
+exit
+
+Script done on 2019-10-16 22:05:47-0400
